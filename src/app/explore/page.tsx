@@ -52,7 +52,7 @@ export default function Explore() {
     );
     getUserDetails();
     setFilteredProperties(filtered);
-  }, [searchInput, location, bedrooms, minPrice, maxPrice, resData.properties]);
+  }, [searchInput, location, bedrooms, minPrice, maxPrice, price, resData.properties]);
 
   const logout = async () => {
     try {
@@ -185,7 +185,7 @@ export default function Explore() {
                   key={index}
                   className="property-card bg-white rounded-lg p-4"
                 >
-                  <img
+                  <Image
                     className="cursor-pointer"
                     src={property.image}
                     alt="property-image"

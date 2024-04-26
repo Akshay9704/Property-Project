@@ -2,6 +2,7 @@
 import { useProperty } from "@/context/PropertyProvider";
 import { useRouter } from "next/navigation";
 import { MdDelete } from "react-icons/md";
+import Image from "next/image";
 
 interface PropertyItem {
   image: string;
@@ -26,7 +27,7 @@ export default function Property() {
             property.map((item: PropertyItem, index: number) => (
               <div key={index} className="flex items-center gap-5 mx-5 my-5">
                 <div>
-                  <img
+                  <Image
                     className="cursor-pointer rounded-lg"
                     src={item.image || "/placeholder.jpg"}
                     alt="Logo"
