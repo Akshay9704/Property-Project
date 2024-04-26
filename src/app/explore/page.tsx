@@ -6,46 +6,61 @@ import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import data from "../../data.json";
-
-interface Property {
-  title: string;
-  image: string;
-  description: string;
-  price: string;
-  location: string;
-  bedrooms: string;
-}
+import Image from "next/image";
 
 export default function Explore() {
-  const [price, setPrice] = React.useState("");
+  const [minPrice, setMinPrice] = React.useState<number | undefined>();
+  const [maxPrice, setMaxPrice] = React.useState<number | undefined>();
   const [location, setLocation] = React.useState("");
   const [bedrooms, setBedrooms] = React.useState("");
   const [searchInput, setSearchInput] = React.useState("");
-  const [filteredProperties, setFilteredProperties] = React.useState<
-    Property[]
-  >([]);
+  const [name, setName] = React.useState("");
+  const [filteredProperties, setFilteredProperties] = React.useState<Property[]>([]);
 
   const router = useRouter();
 
   const resData = data;
 
+  const getUserDetails = async () => {
+    const res = await axios.get("/api/users/me");
+    const name = res.data.data.name;
+    setName(name);
+  };
+
+  const price = minPrice && maxPrice;
+
+  interface Property {
+    title: string;
+    image: string;
+    description: string;
+    price: number;
+    location: string;
+    bedrooms: string;
+  }
+
   React.useEffect(() => {
-    const filtered = resData.properties.filter((property: Property) =>
-      property.title.toLowerCase().includes(searchInput.toLowerCase()) &&
-      (price ? property.price.includes(price) : true) &&
-      (location ? property.location === location : true) &&
-      (bedrooms ? property.bedrooms === bedrooms : true)
+    const filtered = resData.properties.filter(
+      (property: Property) =>
+        property.title.toLowerCase().includes(searchInput.toLowerCase()) &&
+        (location ? property.location === location : true) &&
+        (bedrooms ? property.bedrooms === bedrooms : true) &&
+        (price
+          ? minPrice && maxPrice
+            ? property.price >= minPrice && property.price <= maxPrice
+            : property.price === price
+          : true)
     );
+    getUserDetails();
     setFilteredProperties(filtered);
-  }, [searchInput, price, location, bedrooms, resData.properties]);  
-  
+  }, [searchInput, location, bedrooms, minPrice, maxPrice, resData.properties]);
+
   const logout = async () => {
     try {
       await axios.get("/api/users/logout");
       toast.success("User logged out successfully");
-      router.push("/");
+      window.location.href = "/";
     } catch (error: any) {
-      toast.error("Something is wrong while signing out!");
+      toast.error("Something went wrong while signing out!");
     }
   };
 
@@ -56,8 +71,10 @@ export default function Explore() {
   };
 
   const handleChangePrice = (event: ChangeEvent<HTMLSelectElement>) => {
-    setPrice(event.target.value);
-  };
+    const [min, max] = event.target.value.split(" - ").map(price => parseInt(price, 10));
+    setMinPrice(min);
+    setMaxPrice(max);
+  };  
 
   const handleChangeLocation = (event: ChangeEvent<HTMLSelectElement>) => {
     setLocation(event.target.value);
@@ -70,37 +87,70 @@ export default function Explore() {
   return (
     <>
       <Toaster position="top-center" />
-      <div className="hero h-full pt-12 pb-5">
-        <div className="flex flex-col items-center mb-1">
-          <h1 className="text-2xl font-bold">Welcome User</h1>
+      <header>
+        <nav className="flex justify-between items-center py-4 px-8">
+          <Image
+            className="cursor-pointer"
+            src="/logo.png"
+            alt="Logo"
+            width={35}
+            height={35}
+            priority
+            onClick={() => router.push("/")}
+          />
+          <ul className="flex space-x-12">
+            <li>
+              <p
+                onClick={() => router.push("/")}
+                className="hover:text-gray-500 font-bold cursor-pointer"
+              >
+                Home
+              </p>
+            </li>
+            <li>
+              <p className="hover:text-gray-500 font-bold cursor-pointer">
+                About
+              </p>
+            </li>
+            <li>
+              <p className="hover:text-gray-500 font-bold cursor-pointer">
+                Contact
+              </p>
+            </li>
+          </ul>
           <button
             onClick={logout}
-            className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-6 rounded mt-1"
+            className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
           >
             Logout
           </button>
+        </nav>
+      </header>
+      <div className="hero h-full pt-12 pb-5">
+        <div className="flex flex-col items-center mb-1">
+          <h1 className="text-2xl font-bold">Welcome {name}</h1>
         </div>
         <div className="mx-20">
           <h1 className="text-4xl font-bold">Find Property</h1>
-          <div className="flex items-center mt-4 gap-3">
+          <div className="flex flex-col md:flex-row lg:flex-row items-center mt-4 gap-3">
             <input
               type="text"
               placeholder="Search for property"
-              className="w-1/3 rounded-lg p-2 outline-none border-2"
+              className="w-full md:w-1/3 lg:w-1/3 rounded-lg p-2 outline-none border-2"
               value={searchInput}
               onChange={handleChangeSearchInput}
             />
             <select
-              className="cursor-pointer w-60 rounded-lg p-2 outline-none border-2"
+              className="cursor-pointer w-52 rounded-lg p-2 outline-none border-2"
               name="priceRange"
               id="priceRange"
-              value={price}
+              value={`${minPrice} - ${maxPrice}`}
               onChange={handleChangePrice}
             >
               <option value="">Price Range</option>
-              <option value="$200 - $300">$200 - $300</option>
-              <option value="$300 - $400">$300 - $400</option>
-              <option value="$400 - $600">$400 - $600</option>
+              <option value={`${200} - ${300}`}>$200 - $300</option>
+              <option value={`${300} - ${400}`}>$300 - $400</option>
+              <option value={`${400} - ${600}`}>$400 - $600</option>
             </select>
             <select
               className="cursor-pointer w-52 rounded-lg p-2 outline-none border-2"
@@ -115,7 +165,7 @@ export default function Explore() {
               <option value="Jaipur">Jaipur</option>
             </select>
             <select
-              className="cursor-pointer w-48 rounded-lg p-2 outline-none border-2"
+              className="cursor-pointer w-52 rounded-lg p-2 outline-none border-2"
               name="bedrooms"
               id="bedrooms"
               value={bedrooms}
@@ -129,7 +179,7 @@ export default function Explore() {
           </div>
           <div>
             <h2 className="text-2xl font-bold mt-8">Featured Properties</h2>
-            <div className="grid grid-cols-3 gap-4 mt-4">
+            <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 mt-4">
               {filteredProperties.map((property: any, index) => (
                 <div
                   key={index}
@@ -153,7 +203,7 @@ export default function Explore() {
                     {property.bedrooms}
                   </p>
                   <p className="text-lg font-semibold text-gray-500">
-                    {property.price}
+                    {`$${property.price}/night`}
                   </p>
                   <Link
                     href={{

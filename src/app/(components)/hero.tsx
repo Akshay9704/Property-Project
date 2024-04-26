@@ -12,8 +12,8 @@ const Hero = () => {
     <>
       <div className="hero flex justify-center items-center gap-40 h-[90vh]">
         <section>
-          <h1 className="text-5xl font-bold">Find a perfect place to stay</h1>
-          <p className="text-xl font-medium my-2">
+          <h1 className="text-3xl lg:text-5xl font-bold">Find a perfect place to stay</h1>
+          <p className="text-lg lg:text-xl font-medium my-2">
             From luxurious homes to cozy cabins
           </p>
           <div className="flex gap-3 mt-5">
@@ -25,7 +25,7 @@ const Hero = () => {
             </button>
           </div>
         </section>
-        <section>
+        <section className="hidden md:block lg:block">
           <Image src="/hero.png" alt="Logo" width={500} height={500} priority />
         </section>
       </div>

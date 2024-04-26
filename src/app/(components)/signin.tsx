@@ -101,6 +101,7 @@ export default function TransitionsModal({ open, setOpen }: SignInModalProps) {
                 value={loginUser.password}
                 name="password"
               />
+              <p className="text-md font-bold">username: test | password: 1234</p>
               <button
                 onClick={signin}
                 className="bg-black hover:bg-gray-700 text-white font-bold p-4 mt-6 w-full rounded-lg"
