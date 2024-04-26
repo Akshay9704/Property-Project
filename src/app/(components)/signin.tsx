@@ -38,12 +38,10 @@ export default function TransitionsModal({ open, setOpen }: SignInModalProps) {
       const res = await axios.post("/api/users/signin", loginUser);
       toast.dismiss();
       toast.success("User logged in successfully");
-      setOpen(false);
       router.push("/explore");
     } catch (error) {
       toast.dismiss();
       toast.error("Invalid Credentials!");
-      router.push("/");
       setOpen(false);
     }
   };

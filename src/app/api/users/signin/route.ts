@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     const user = await User.findOne({ username });
     if (!user) {
       return NextResponse.json(
-        { error: "Invalid credentials" },
+        { error: "User does not exist" },
         { status: 400 }
       );
     }
@@ -32,7 +32,8 @@ export async function POST(req: NextRequest) {
     //create token data
     const tokenData = {
       id: user._id,
-      username: (user as any).username,
+      username: user.username,
+      email: user.email,
     };
     //token token
     const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, {

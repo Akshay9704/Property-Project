@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import { ChangeEvent } from "react";
-
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
@@ -30,22 +30,15 @@ export default function Explore() {
   const resData = data;
 
   React.useEffect(() => {
-    const filtered = resData.properties.filter(
-      (property: Property) =>
-        property.title.toLowerCase().includes(searchInput.toLowerCase()) &&
-        property.location.includes(location) &&
-        property.bedrooms.includes(bedrooms) &&
-        price ? property.price.includes(price) : true
+    const filtered = resData.properties.filter((property: Property) =>
+      property.title.toLowerCase().includes(searchInput.toLowerCase()) &&
+      (price ? property.price.includes(price) : true) &&
+      (location ? property.location === location : true) &&
+      (bedrooms ? property.bedrooms === bedrooms : true)
     );
     setFilteredProperties(filtered);
-  }, [searchInput, location, bedrooms, resData.properties]);
-
-  const handleChangeSearchInput = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setSearchInput(event.target.value);
-  };
-
+  }, [searchInput, price, location, bedrooms, resData.properties]);  
+  
   const logout = async () => {
     try {
       await axios.get("/api/users/logout");
@@ -54,6 +47,12 @@ export default function Explore() {
     } catch (error: any) {
       toast.error("Something is wrong while signing out!");
     }
+  };
+
+  const handleChangeSearchInput = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchInput(event.target.value);
   };
 
   const handleChangePrice = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -88,6 +87,7 @@ export default function Explore() {
               type="text"
               placeholder="Search for property"
               className="w-1/3 rounded-lg p-2 outline-none border-2"
+              value={searchInput}
               onChange={handleChangeSearchInput}
             />
             <select
@@ -122,9 +122,9 @@ export default function Explore() {
               onChange={handleChangeBedrooms}
             >
               <option value="">Bedrooms</option>
-              <option value="2">2 Bed</option>
-              <option value="3">3 Bed</option>
-              <option value="4">4 Bed</option>
+              <option value="Bed 2">2 Bed</option>
+              <option value="Bed 3">3 Bed</option>
+              <option value="Bed 4">4 Bed</option>
             </select>
           </div>
           <div>
@@ -155,6 +155,22 @@ export default function Explore() {
                   <p className="text-lg font-semibold text-gray-500">
                     {property.price}
                   </p>
+                  <Link
+                    href={{
+                      pathname: "/property",
+                      query: {
+                        image: property.image,
+                        title: property.title,
+                        description: property.description,
+                        location: property.location,
+                        price: property.price,
+                      },
+                    }}
+                  >
+                    <button className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-6 rounded mt-1">
+                      Book Now!
+                    </button>
+                  </Link>
                 </div>
               ))}
             </div>
