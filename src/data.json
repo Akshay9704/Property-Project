@@ -1,0 +1,148 @@
+{
+  "properties": [
+    {
+      "title": "Seaside Cottage Getaway",
+      "image": "https://pixabay.com/get/gd39dafec971bf2c446d6909536e31728fcd991834cddc22df26d2158dda8c0beec095ee98415b640d0edb7d10fd72c1c674c65207e1719ab280172b3321c97e7_1280.jpg",
+      "description": "Escape to this charming seaside cottage nestled along the coastline. Enjoy stunning sunsets, beach walks, and cozy evenings by the fire.",
+      "price": "$250/night",
+      "location": "Jaipur",
+      "bedrooms": "Bed 2"
+    },
+    {
+      "title": "Rustic Mountain Lodge",
+      "image": "https://cdn.pixabay.com/photo/2017/02/01/22/02/mountain-landscape-2031539_960_720.jpg",
+      "description": "Experience the beauty of the mountains in this rustic lodge. Surrounded by nature, it's the perfect retreat for outdoor enthusiasts.",
+      "price": "$200/night",
+      "location": "Gurgaon",
+      "bedrooms": "Bed 3"
+    },
+    {
+      "title": "Urban Loft with City Views",
+      "image": "https://pixabay.com/get/g307386a032851e51383bb497f6e6d0a46d3d7bb0b65b76c63d934642a66bdaa3c223b457b7dc58535e7abde11a305180137f7d1f29124d37101b32d1c5075f2d_1280.jpg",
+      "description": "Live in style in this modern loft with panoramic city views. Perfectly located near downtown attractions, restaurants, and nightlife.",
+      "price": "$300/night",
+      "location": "Delhi",
+      "bedrooms": "Bed 4"
+    },
+    {
+      "title": "Lakefront Cabin Retreat",
+      "image": "https://pixabay.com/get/g4c19a443acaeb68be704f533fa324c644d670f0e06a6ccab15c524b9f4f1fa536936833979870c05803f749b5b36f767da8d1365762320248b9ea0b6866b6c59_1280.jpg",
+      "description": "Unwind in this cozy cabin nestled on the shores of a serene lake. Enjoy fishing, kayaking, and evenings around the campfire.",
+      "price": "$180/night",
+      "location": "Jaipur",
+      "bedrooms": "Bed 2"
+    },
+    {
+      "title": "Luxury Beachfront Villa",
+      "image": "https://pixabay.com/get/ga56f9350b250d14c4be34081ad3dd04bc20601391327b8b2f765da2a2076ede0c3afe92128813407f8d380bd7e9b9070_1280.jpg",
+      "description": "Indulge in luxury at this stunning beachfront villa. With private beach access and luxurious amenities, it's an unforgettable retreat.",
+      "price": "$500/night",
+      "location": "Delhi",
+      "bedrooms": "Bed 3"
+    },
+    {
+      "title": "Countryside Farmhouse Retreat",
+      "image": "https://cdn.pixabay.com/photo/2016/11/18/14/05/brick-wall-1834784_960_720.jpg",
+      "description": "Experience the tranquility of the countryside in this charming farmhouse. Enjoy fresh air, scenic views, and farm-to-table dining.",
+      "price": "$150/night",
+      "location": "Gurgaon",
+      "bedrooms": "Bed 4"
+    },
+    {
+      "title": "Ski-in/Ski-out Chalet",
+      "image": "https://pixabay.com/get/g9e829aff18562953ea159a80efaaedfd03d4843afcf016650f29ff6988bc07dff3747e6fab97508ca22fee6fa6b639cc_1280.jpg",
+      "description": "Hit the slopes from this cozy ski-in/ski-out chalet. After a day of skiing, relax in the hot tub and enjoy the mountain views.",
+      "price": "$400/night",
+      "location": "Jaipur",
+      "bedrooms": "Bed 3"
+    },
+    {
+      "title": "Historic City Townhouse",
+      "image": "https://pixabay.com/get/ga56f9350b250d14c4be34081ad3dd04bc20601391327b8b2f765da2a2076ede0c3afe92128813407f8d380bd7e9b9070_1280.jpg",
+      "description": "Step back in time in this beautifully restored historic townhouse. Located in the heart of the city, it's a perfect blend of old-world charm and modern convenience.",
+      "price": "$250/night",
+      "location": "Delhi",
+      "bedrooms": "Bed 2"
+    },
+    {
+      "title": "Desert Oasis Retreat",
+      "image": "https://cdn.pixabay.com/photo/2017/02/01/22/02/mountain-landscape-2031539_960_720.jpg",
+      "description": "Escape to this luxurious desert oasis surrounded by palm trees and sand dunes. Relax by the pool or explore nearby desert attractions.",
+      "price": "$350/night",
+      "location": "Gurgaon",
+      "bedrooms": "Bed 4"
+    },
+    {
+      "title": "Tropical Beach Bungalow",
+      "image": "https://pixabay.com/get/gd39dafec971bf2c446d6909536e31728fcd991834cddc22df26d2158dda8c0beec095ee98415b640d0edb7d10fd72c1c674c65207e1719ab280172b3321c97e7_1280.jpg",
+      "description": "Experience island life in this charming beach bungalow. Just steps from the ocean, it's the perfect place to relax and unwind.",
+      "price": "$300/night",
+      "location": "Jaipur",
+      "bedrooms": "Bed 3"
+    },
+    {
+      "title": "Mountain View Cabin",
+      "image": "https://pixabay.com/get/g4c19a443acaeb68be704f533fa324c644d670f0e06a6ccab15c524b9f4f1fa536936833979870c05803f749b5b36f767da8d1365762320248b9ea0b6866b6c59_1280.jpg",
+      "description": "Enjoy breathtaking mountain views from this cozy cabin. Perfect for nature lovers and outdoor enthusiasts.",
+      "price": "$200/night",
+      "location": "Delhi",
+      "bedrooms": "Bed 4"
+    },
+    {
+      "title": "Modern City Apartment",
+      "image": "https://pixabay.com/get/g307386a032851e51383bb497f6e6d0a46d3d7bb0b65b76c63d934642a66bdaa3c223b457b7dc58535e7abde11a305180137f7d1f29124d37101b32d1c5075f2d_1280.jpg",
+      "description": "Live in style in this modern city apartment. Located in a vibrant neighborhood, it's the perfect base for exploring the city.",
+      "price": "$200/night",
+      "location": "Gurgaon",
+      "bedrooms": "Bed 3"
+    },
+    {
+      "title": "Coastal Beach House",
+      "image": "https://pixabay.com/get/gd39dafec971bf2c446d6909536e31728fcd991834cddc22df26d2158dda8c0beec095ee98415b640d0edb7d10fd72c1c674c65207e1719ab280172b3321c97e7_1280.jpg",
+      "description": "Relax in this coastal beach house just steps from the ocean. Enjoy beach walks, sunsets, and the sound of the waves.",
+      "price": "$250/night",
+      "location": "Jaipur",
+      "bedrooms": "Bed 2"
+    },
+    {
+      "title": "Mountain Retreat Cabin",
+      "image": "https://pixabay.com/get/g4c19a443acaeb68be704f533fa324c644d670f0e06a6ccab15c524b9f4f1fa536936833979870c05803f749b5b36f767da8d1365762320248b9ea0b6866b6c59_1280.jpg",
+      "description": "Escape to the mountains in this cozy retreat cabin. Surrounded by nature, it's the perfect place to relax and recharge.",
+      "price": "$180/night",
+      "location": "Delhi",
+      "bedrooms": "Bed 3"
+    },
+    {
+      "title": "Luxury Lakeside Villa",
+      "image": "https://pixabay.com/get/ga56f9350b250d14c4be34081ad3dd04bc20601391327b8b2f765da2a2076ede0c3afe92128813407f8d380bd7e9b9070_1280.jpg",
+      "description": "Indulge in luxury at this lakeside villa with stunning views. Enjoy water activities, sunsets, and evenings by the firepit.",
+      "price": "$500/night",
+      "location": "Gurgaon",
+      "bedrooms": "Bed 4"
+    },
+    {
+      "title": "Historic Country Estate",
+      "image": "https://cdn.pixabay.com/photo/2016/11/18/14/05/brick-wall-1834784_960_720.jpg",
+      "description": "Step back in time in this historic country estate. Surrounded by gardens and rolling hills, it's a peaceful retreat from the city.",
+      "price": "$150/night",
+      "location": "Jaipur",
+      "bedrooms": "Bed 2"
+    },
+    {
+      "title": "Ski Chalet with Mountain Views",
+      "image": "https://pixabay.com/get/g9e829aff18562953ea159a80efaaedfd03d4843afcf016650f29ff6988bc07dff3747e6fab97508ca22fee6fa6b639cc_1280.jpg",
+      "description": "Hit the slopes from this ski chalet with stunning mountain views. After a day of skiing, relax in the sauna and enjoy the alpine scenery.",
+      "price": "$400/night",
+      "location": "Delhi",
+      "bedrooms": "Bed 3"
+    },
+    {
+      "title": "City Center Townhouse",
+      "image": "https://pixabay.com/get/ga56f9350b250d14c4be34081ad3dd04bc20601391327b8b2f765da2a2076ede0c3afe92128813407f8d380bd7e9b9070_1280.jpg",
+      "description": "Live in the heart of the city in this stylish townhouse. Walk to restaurants, shops, and attractions from this central location.",
+      "price": "$250/night",
+      "location": "Gurgaon",
+      "bedrooms": "Bed 4"
+    }
+  ]
+}

@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Home",
-  description: "Home page",
+  title: "Totality-Task | Akshay Bhasin",
+  description: "This website is designed and made by Akshay Bhasin",
 };
 
 export default function RootLayout({

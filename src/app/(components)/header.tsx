@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import SignInModal from "../(components)/signin";
 import Image from "next/image";
 
 const Header = () => {
   const [openSignIn, setOpenSignIn] = useState(false);
-
   const handleOpenSignIn = () => setOpenSignIn(true);
+  const router = useRouter();
   return (
     <>
       <header>
@@ -21,19 +22,13 @@ const Header = () => {
           />
           <ul className="flex space-x-12">
             <li>
-              <a className="hover:text-gray-500 font-bold" href="/">
-                Home
-              </a>
+              <p onClick={() => router.push('/')} className="hover:text-gray-500 font-bold cursor-pointer">Home</p>
             </li>
             <li>
-              <a className="hover:text-gray-500 font-bold" href="/about">
-                About
-              </a>
+              <p className="hover:text-gray-500 font-bold cursor-pointer">About</p>
             </li>
             <li>
-              <a className="hover:text-gray-500 font-bold" href="/contact">
-                Contact
-              </a>
+              <p className="hover:text-gray-500 font-bold cursor-pointer">Contact</p>
             </li>
           </ul>
           <button

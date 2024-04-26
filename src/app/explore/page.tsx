@@ -1,33 +1,86 @@
 "use client";
-import Header from "../(components)/header";
 import * as React from "react";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import Image from "next/image";
+import { ChangeEvent } from "react";
+
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+import data from "../../data.json";
+
+interface Property {
+  title: string;
+  image: string;
+  description: string;
+  price: string;
+  location: string;
+  bedrooms: string;
+}
 
 export default function Explore() {
   const [price, setPrice] = React.useState("");
   const [location, setLocation] = React.useState("");
   const [bedrooms, setBedrooms] = React.useState("");
+  const [searchInput, setSearchInput] = React.useState("");
+  const [filteredProperties, setFilteredProperties] = React.useState<
+    Property[]
+  >([]);
 
-  const handleChangePrice = (event: SelectChangeEvent) => {
-    setPrice(event.target.value as string);
+  const router = useRouter();
+
+  const resData = data;
+
+  React.useEffect(() => {
+    const filtered = resData.properties.filter(
+      (property: Property) =>
+        property.title.toLowerCase().includes(searchInput.toLowerCase()) &&
+        property.location.includes(location) &&
+        property.bedrooms.includes(bedrooms) &&
+        price ? property.price.includes(price) : true
+    );
+    setFilteredProperties(filtered);
+  }, [searchInput, location, bedrooms, resData.properties]);
+
+  const handleChangeSearchInput = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchInput(event.target.value);
   };
 
-  const handleChangeLocation = (event: SelectChangeEvent) => {
-    setLocation(event.target.value as string);
+  const logout = async () => {
+    try {
+      await axios.get("/api/users/logout");
+      toast.success("User logged out successfully");
+      router.push("/");
+    } catch (error: any) {
+      toast.error("Something is wrong while signing out!");
+    }
   };
 
-  const handleChangeBedrooms = (event: SelectChangeEvent) => {
-    setBedrooms(event.target.value as string);
+  const handleChangePrice = (event: ChangeEvent<HTMLSelectElement>) => {
+    setPrice(event.target.value);
+  };
+
+  const handleChangeLocation = (event: ChangeEvent<HTMLSelectElement>) => {
+    setLocation(event.target.value);
+  };
+
+  const handleChangeBedrooms = (event: ChangeEvent<HTMLSelectElement>) => {
+    setBedrooms(event.target.value);
   };
 
   return (
     <>
-      <Header />
+      <Toaster position="top-center" />
       <div className="hero h-full pt-12 pb-5">
+        <div className="flex flex-col items-center mb-1">
+          <h1 className="text-2xl font-bold">Welcome User</h1>
+          <button
+            onClick={logout}
+            className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-6 rounded mt-1"
+          >
+            Logout
+          </button>
+        </div>
         <div className="mx-20">
           <h1 className="text-4xl font-bold">Find Property</h1>
           <div className="flex items-center mt-4 gap-3">
@@ -35,116 +88,75 @@ export default function Explore() {
               type="text"
               placeholder="Search for property"
               className="w-1/3 rounded-lg p-2 outline-none border-2"
+              onChange={handleChangeSearchInput}
             />
-            <FormControl
-              className="bg-white"
-              sx={{ minWidth: 200 }}
-              size="small"
+            <select
+              className="cursor-pointer w-60 rounded-lg p-2 outline-none border-2"
+              name="priceRange"
+              id="priceRange"
+              value={price}
+              onChange={handleChangePrice}
             >
-              <InputLabel id="demo-select-small-label">Price Range</InputLabel>
-              <Select
-                labelId="demo-select-small-label"
-                id="demo-select-small"
-                value={price}
-                label="price"
-                onChange={handleChangePrice}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>10000 - 15000</MenuItem>
-                <MenuItem value={20}>15000 - 20000</MenuItem>
-                <MenuItem value={30}>20000 - 25000</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl
-              className="bg-white"
-              sx={{ minWidth: 200 }}
-              size="small"
+              <option value="">Price Range</option>
+              <option value="$200 - $300">$200 - $300</option>
+              <option value="$300 - $400">$300 - $400</option>
+              <option value="$400 - $600">$400 - $600</option>
+            </select>
+            <select
+              className="cursor-pointer w-52 rounded-lg p-2 outline-none border-2"
+              name="location"
+              id="location"
+              value={location}
+              onChange={handleChangeLocation}
             >
-              <InputLabel id="demo-select-small-label">Location</InputLabel>
-              <Select
-                labelId="demo-select-small-label"
-                id="demo-select-small"
-                value={location}
-                label="location"
-                onChange={handleChangeLocation}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Delhi</MenuItem>
-                <MenuItem value={20}>Gurgaon</MenuItem>
-                <MenuItem value={30}>Jaipur</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl
-              className="bg-white"
-              sx={{ minWidth: 120 }}
-              size="small"
+              <option value="">Select Location</option>
+              <option value="Gurgaon">Gurgaon</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Jaipur">Jaipur</option>
+            </select>
+            <select
+              className="cursor-pointer w-48 rounded-lg p-2 outline-none border-2"
+              name="bedrooms"
+              id="bedrooms"
+              value={bedrooms}
+              onChange={handleChangeBedrooms}
             >
-              <InputLabel id="demo-select-small-label">Bedrooms</InputLabel>
-              <Select
-                labelId="demo-select-small-label"
-                id="demo-select-small"
-                value={bedrooms}
-                label="bedrooms"
-                onChange={handleChangeBedrooms}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={2}>2 Bed</MenuItem>
-                <MenuItem value={3}>3 Bed</MenuItem>
-                <MenuItem value={4}>4 Bed</MenuItem>
-              </Select>
-            </FormControl>
-            <button className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-6 rounded ml-8">
-              Search
-            </button>
+              <option value="">Bedrooms</option>
+              <option value="2">2 Bed</option>
+              <option value="3">3 Bed</option>
+              <option value="4">4 Bed</option>
+            </select>
           </div>
           <div>
             <h2 className="text-2xl font-bold mt-8">Featured Properties</h2>
             <div className="grid grid-cols-3 gap-4 mt-4">
-              <div className="property-card bg-white rounded-lg p-4">
-                <Image
-                  className="cursor-pointer"
-                  src="/property1.jpg"
-                  alt="property1"
-                  width={500}
-                  height={100}
-                />
-                <h3 className="text-lg font-bold mt-2">Property 1</h3>
-                <p className="text-md text-gray-500">Delhi</p>
-                <p className="text-md text-gray-500">2 Bed</p>
-                <p className="text-md text-gray-500">15000</p>
-              </div>
-              <div className="property-card bg-white rounded-lg p-4">
-                <Image
-                  className="cursor-pointer"
-                  src="/property2.jpg"
-                  alt="property2"
-                  width={500}
-                  height={100}
-                />
-                <h3 className="text-lg font-bold mt-2">Property 2</h3>
-                <p className="text-md text-gray-500">Gurgaon</p>
-                <p className="text-md text-gray-500">3 Bed</p>
-                <p className="text-md text-gray-500">20000</p>
-              </div>
-              <div className="property-card bg-white rounded-lg p-4">
-                <Image
-                  className="cursor-pointer"
-                  src="/property3.jpg"
-                  alt="property3"
-                  width={500}
-                  height={100}
-                />
-                <h3 className="text-lg font-bold mt-2">Property 3</h3>
-                <p className="text-md text-gray-500">Jaipur</p>
-                <p className="text-md text-gray-500">4 Bed</p>
-                <p className="text-md text-gray-500">25000</p>
-              </div>
+              {filteredProperties.map((property: any, index) => (
+                <div
+                  key={index}
+                  className="property-card bg-white rounded-lg p-4"
+                >
+                  <img
+                    className="cursor-pointer"
+                    src={property.image}
+                    alt="property-image"
+                    width={500}
+                    height={100}
+                  />
+                  <h3 className="text-xl font-bold mt-2">{property.title}</h3>
+                  <p className="text-md text-gray-500">
+                    {property.description}
+                  </p>
+                  <p className="text-md font-semibold text-gray-800">
+                    {property.location}
+                  </p>
+                  <p className="text-md font-semibold text-gray-800">
+                    {property.bedrooms}
+                  </p>
+                  <p className="text-lg font-semibold text-gray-500">
+                    {property.price}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -160,4 +172,3 @@ export default function Explore() {
     </>
   );
 }
-

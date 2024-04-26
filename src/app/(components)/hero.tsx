@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from 'next/navigation'
 import SignUpModal from "../(components)/signup";
 import Image from "next/image";
 
 const Hero = () => {
   const [openSignUp, setOpenSignUp] = useState(false);
-
   const handleOpenSignUp = () => setOpenSignUp(true);
+  const router = useRouter();
   return (
     <>
       <div className="hero flex justify-center items-center gap-40 h-[90vh]">
@@ -19,7 +20,7 @@ const Hero = () => {
             <button onClick={handleOpenSignUp} className="border-2 hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
               Sign Up
             </button>
-            <button className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            <button onClick={() => router.push('/explore')} className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
               Explore
             </button>
           </div>
