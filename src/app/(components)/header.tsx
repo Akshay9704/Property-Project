@@ -20,7 +20,7 @@ const Header = () => {
             height={35}
             priority
           />
-          <ul className="flex space-x-12">
+          <ul className="hidden md:flex lg:flex space-x-12">
             <li>
               <p onClick={() => router.push('/')} className="hover:text-gray-500 font-bold cursor-pointer">Home</p>
             </li>

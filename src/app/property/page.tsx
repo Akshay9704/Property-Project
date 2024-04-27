@@ -1,5 +1,5 @@
 "use client";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useProperty } from "@/context/PropertyProvider";
 import { useRouter } from "next/navigation";
@@ -26,6 +26,10 @@ function PropertyContent() {
   const property = useProperty();
   const router = useRouter();
 
+  const [count, setCount] = useState(1);
+
+  const updatedPrice = price * count;
+
   const logout = async () => {
     try {
       await axios.get("/api/users/logout");
@@ -39,7 +43,7 @@ function PropertyContent() {
   const handleCart = () => {
     property[1]((prevProperty: Array<object>) => [
       ...prevProperty,
-      { image, title, description, location, price },
+      { image, title, description, location, updatedPrice },
     ]);
     toast.success("Added to cart");
     router.push("/cart");
@@ -87,7 +91,7 @@ function PropertyContent() {
           </button>
         </nav>
       </header>
-      <div className="flex flex-col mt-20 items-center mx-10">
+      <div className="flex flex-col mt-20 items-center mx-10 ">
         <div>
           <Image
             className="w-96 h-80 object-cover rounded-xl mb-5"
@@ -101,10 +105,26 @@ function PropertyContent() {
           <h1 className="font-bold text-3xl">{title}</h1>
           <p className="text-md font-light my-2">{description}</p>
           <p className="text-md font-light my-2">{location}</p>
-          <p className="text-md font-bold my-2">{`$${price}/night`}</p>
+          <p className="text-md font-bold my-2">{`$${updatedPrice}/night`}</p>
+          <div className="flex items-center gap-2">
+            <p className="text-md font-semibold">Quantity</p>
+            <button
+              onClick={() => setCount(count - 1)}
+              className="bg-gray-200 text-lg font-semibold px-2 py-1 rounded-lg"
+            >
+              -
+            </button>
+            <p className="text-md font-semibold">{count}</p>
+            <button
+              onClick={() => setCount(count + 1)}
+              className="bg-gray-200 text-lg font-semibold px-2 py-1 rounded-lg"
+            >
+              +
+            </button>
+          </div>
         </div>
       </div>
-      <div className="flex justify-center gap-5">
+      <div className="flex justify-center gap-5 mb-10">
         <button
           onClick={handleCart}
           className="mt-2 w-1/2 font-semibold rounded-2xl px-3 py-2 text-lg text-white bg-black hover:bg-gray-600"
