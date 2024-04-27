@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
-  const isPublicPath = path === "/" || path === "/explore";
+  const isPublicPath = path === "/" ;
 
   const token = req.cookies.get("token")?.value || "";
   if (token && path === "/") {
@@ -12,7 +12,7 @@ export function middleware(req: NextRequest) {
   if (!token && !isPublicPath) {
     return NextResponse.redirect(new URL("/", req.nextUrl));
   }
-  if (!token && (path === "/property" || path === "/cart")) {
+  if (!token && (path === "/explore" || path === "/property" || path === "/cart")) {
     return NextResponse.redirect(new URL("/", req.nextUrl));
   }
 }
