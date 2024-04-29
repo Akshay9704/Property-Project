@@ -1,6 +1,5 @@
 "use client";
 import { useProperty } from "@/context/PropertyProvider";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import Image from "next/image";

@@ -58,7 +58,9 @@ export default function Explore() {
     try {
       await axios.get("/api/users/logout");
       toast.success("User logged out successfully");
+      setTimeout(() => {
       window.location.href = "/";
+      } , 2000);
     } catch (error: any) {
       toast.error("Something went wrong while signing out!");
     }
@@ -98,7 +100,7 @@ export default function Explore() {
             priority
             onClick={() => router.push("/")}
           />
-          <ul className="flex space-x-12">
+          <ul className="hidden md:flex lg:flex space-x-12">
             <li>
               <p
                 onClick={() => router.push("/")}

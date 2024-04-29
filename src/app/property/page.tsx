@@ -34,7 +34,9 @@ function PropertyContent() {
     try {
       await axios.get("/api/users/logout");
       toast.success("User logged out successfully");
-      window.location.href = "/";
+      setTimeout(() => {
+        window.location.href = "/";
+        } , 2000);
     } catch (error: any) {
       toast.error("Something went wrong while signing out!");
     }
@@ -63,7 +65,7 @@ function PropertyContent() {
             priority
             onClick={() => router.push("/")}
           />
-          <ul className="flex space-x-12">
+          <ul className="hidden md:flex lg:flex space-x-12">
             <li>
               <p
                 onClick={() => router.push("/")}
