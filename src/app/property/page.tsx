@@ -30,18 +30,6 @@ function PropertyContent() {
 
   const updatedPrice = price * count;
 
-  const logout = async () => {
-    try {
-      await axios.get("/api/users/logout");
-      toast.success("User logged out successfully");
-      setTimeout(() => {
-        window.location.href = "/";
-        } , 2000);
-    } catch (error: any) {
-      toast.error("Something went wrong while signing out!");
-    }
-  };
-
   const handleCart = () => {
     property[1]((prevProperty: Array<object>) => [
       ...prevProperty,
@@ -54,45 +42,6 @@ function PropertyContent() {
   return (
     <>
       <Toaster position="top-center" />
-      <header>
-        <nav className="flex justify-between items-center py-4 px-8">
-          <Image
-            className="cursor-pointer"
-            src="/logo.png"
-            alt="Logo"
-            width={35}
-            height={35}
-            priority
-            onClick={() => router.push("/")}
-          />
-          <ul className="hidden md:flex lg:flex space-x-12">
-            <li>
-              <p
-                onClick={() => router.push("/")}
-                className="hover:text-gray-500 font-bold cursor-pointer"
-              >
-                Home
-              </p>
-            </li>
-            <li>
-              <p className="hover:text-gray-500 font-bold cursor-pointer">
-                About
-              </p>
-            </li>
-            <li>
-              <p className="hover:text-gray-500 font-bold cursor-pointer">
-                Contact
-              </p>
-            </li>
-          </ul>
-          <button
-            onClick={logout}
-            className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Logout
-          </button>
-        </nav>
-      </header>
       <div className="flex flex-col mt-20 items-center mx-10 ">
         <div>
           <Image
