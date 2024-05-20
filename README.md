@@ -1,8 +1,8 @@
-# Totality Frontend Challenge
+# Property Project
 
 ## Description
 
-The Totality Frontend Challenge is a web application designed and built by Akshay Bhasin. It is a platform aimed at showcasing properties with various functionalities.
+The Property Project is a web application designed and built by Akshay Bhasin. It is a platform aimed at showcasing properties with various functionalities.
 
 ## Tech Stack
 
