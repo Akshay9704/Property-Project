@@ -6,7 +6,7 @@ import { PropertyProvider } from "@/context/PropertyProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Totality-Task | Akshay Bhasin",
+  title: "Property-Project | Akshay Bhasin",
   description: "This website is designed and made by Akshay Bhasin",
 };
 
